@@ -1,9 +1,10 @@
-import os
+from pathlib import Path
+
 from model.cnn_model import create_cnn_model
 from utils.preprocessing import load_and_preprocess_mnist
 
 
-MODEL_PATH = "model/saved_model/digit_model.keras"
+MODEL_PATH = Path(__file__).resolve().parent / "saved_model" / "digit_model.keras"
 
 
 def train_model():
@@ -21,7 +22,7 @@ def train_model():
 
     loss, accuracy = model.evaluate(x_test, y_test)
 
-    os.makedirs("model/saved_model", exist_ok=True)
+    MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
     model.save(MODEL_PATH)
 
     print("Modèle sauvegardé :", MODEL_PATH)

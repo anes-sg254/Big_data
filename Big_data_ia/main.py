@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 
 from utils.preprocessing import load_and_preprocess_mnist
 from utils.noise import add_noise
-from model.predict import load_model, predict_digit
+from model.predict import load_trained_model, predict_digit
 
 
 def main():
     x_train, y_train, x_test, y_test = load_and_preprocess_mnist()
 
-    model = load_model()
+    model = load_trained_model()
 
     image = x_test[0]
     noisy_image = add_noise(image, noise_factor=0.35)

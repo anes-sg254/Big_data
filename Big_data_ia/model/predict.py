@@ -1,12 +1,25 @@
+from pathlib import Path
+
 import numpy as np
-import tensorflow as tf
 
 
-MODEL_PATH = "model/saved_model/digit_model.keras"
+MODEL_PATH = Path(__file__).resolve().parent / "saved_model" / "digit_model.keras"
 
 
 def load_trained_model():
+    try:
+        import tensorflow as tf
+    except ModuleNotFoundError as exc:
+        raise ModuleNotFoundError(
+            "TensorFlow is required to load the trained model. "
+            "Install dependencies with `pip install -r requirements.txt`."
+        ) from exc
+
     return tf.keras.models.load_model(MODEL_PATH)
+
+
+def load_model():
+    return load_trained_model()
 
 
 def predict_digit(model, image):
