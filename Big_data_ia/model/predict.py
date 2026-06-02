@@ -5,7 +5,7 @@ import tensorflow as tf
 MODEL_PATH = "model/saved_model/digit_model.keras"
 
 
-def load_model():
+def load_trained_model():
     return tf.keras.models.load_model(MODEL_PATH)
 
 
@@ -13,7 +13,7 @@ def predict_digit(model, image):
     if image.shape == (28, 28):
         image = image.reshape(1, 28, 28, 1)
 
-    if image.shape == (28, 28, 1):
+    elif image.shape == (28, 28, 1):
         image = image.reshape(1, 28, 28, 1)
 
     image = image.astype("float32")
